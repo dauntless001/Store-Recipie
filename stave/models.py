@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.lookups import Q
 from storerecipe.utils.models import TimeBasedModel
 from storerecipe.utils import choices, strings
 # Create your models here.

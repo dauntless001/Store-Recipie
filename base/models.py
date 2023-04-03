@@ -20,10 +20,10 @@ class User(AbstractUser):
                 return getattr(self.image, 'url', None)
         return f"{settings.STATIC_URL}img/avatars/user-avatar.png" 
     
-    def save(self, request, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if not self.display_name:
              self.display_name = self.username
-        return super(self, User).save(*args, **kwargs)
+        return super(User, self).save(*args, **kwargs)
     
     def get_staves(self):
          return self.stave_set.published()
