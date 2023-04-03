@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # local
     "base",
+    "stave",
     # 3rd party
     'allauth',
     'allauth.account',

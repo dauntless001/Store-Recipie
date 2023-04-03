@@ -24,5 +24,8 @@ class User(AbstractUser):
         if not self.display_name:
              self.display_name = self.username
         return super(self, User).save(*args, **kwargs)
+    
+    def get_staves(self):
+         return self.stave_set.published()
         
 

@@ -8,3 +8,7 @@ class Gender(models.TextChoices):
 class Marital(models.TextChoices):
     Married = ("married", "Married")
     Single = ("single", "Single")
+
+class Status(models.TextChoices):
+    Draft = ("draft", "Draft")
+    Published = ("published", "Published")
