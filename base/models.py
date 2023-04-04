@@ -26,6 +26,5 @@ class User(AbstractUser):
         return super(User, self).save(*args, **kwargs)
     
     def get_staves(self):
-         return self.stave_set.published()
-        
+         return self.stave_set.published()  
 
