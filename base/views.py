@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from base.forms import UserForm
 from django.contrib import messages
+from django.views.generic import View
+from follow.models import Follow
+from stave.models import Stave
+from django.db.models import Q
 # Create your views here.
 
 class ProfileView(TemplateView):
@@ -22,4 +26,20 @@ class ProfileView(TemplateView):
             messages.error(self.request, 'Error updating profile')
         return redirect('base:profile')
 
+
+class IndexView(View):
+    template_name = 'home.html'
+    def get_following_staves(self):
+        people_followed = Follow.objects.filter(follower=self.request.user).values_list('username', flat=True)
+        staves = Stave.objects.filter(
+            Q(user__username__in=people_followed) | 
+            Q(user__user=self.request.user)
+            ).published().ordered_by('-created_at')
+        return staves
+
+    def get(self, request, *args, **kwargs):
+        context = {
+            'posts' : self.get_following_staves()
+        }
+        return render(request, self.template_name, context)
         
