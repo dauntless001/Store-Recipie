@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # local
     "base",
+    "bookmark",
     "follow",
     "stave",
     # 3rd party
