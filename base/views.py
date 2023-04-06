@@ -5,10 +5,11 @@ from django.contrib import messages
 from django.views.generic import View
 from follow.models import Follow
 from stave.models import Stave
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 # Create your views here.
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin,TemplateView):
     template_name = ''
 
     def get_context_data(self, **kwargs):
@@ -27,7 +28,7 @@ class ProfileView(TemplateView):
         return redirect('base:profile')
 
 
-class IndexView(View):
+class IndexView(LoginRequiredMixin,View):
     template_name = 'home.html'
     def get_following_staves(self):
         people_followed = Follow.objects.filter(follower=self.request.user).values_list('username', flat=True)
